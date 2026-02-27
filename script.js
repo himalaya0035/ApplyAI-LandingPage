@@ -38,6 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
   observeElements('.reveal-up');
   observeElements('.reveal-left');
   observeElements('.reveal-right');
+
+  // Set current year in footer
+  const yearElement = document.querySelector('#current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 });
 
 // Glowing Cards Hover Effect

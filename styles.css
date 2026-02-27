@@ -571,6 +571,42 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1;
 }
 
+/* Feature Card Animated Border Glow */
+.feature-card.glass-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feature-card.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.05));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: all 0.5s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.feature-card.glass-card.fc-1:hover::before {
+  background: linear-gradient(135deg, var(--accent-main), rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, var(--accent-secondary));
+  opacity: 1;
+}
+
+.feature-card.glass-card.fc-2:hover::before {
+  background: linear-gradient(135deg, var(--accent-secondary), rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, var(--accent-tertiary));
+  opacity: 1;
+}
+
+.feature-card.glass-card.fc-3:hover::before {
+  background: linear-gradient(135deg, var(--accent-tertiary), rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, var(--accent-main));
+  opacity: 1;
+}
+
 .fc-icon {
   width: 50px;
   height: 50px;
@@ -582,6 +618,67 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.5rem;
   color: var(--accent-main);
   border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.fc-graphic {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 150px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  transition: all 0.5s ease;
+}
+
+.feature-card:hover .fc-graphic {
+  opacity: 1;
+  transform: translateX(-10px) scale(1.05);
+}
+
+/* SVG Graphic Animations */
+@keyframes spin-slow {
+  100% { transform: rotate(360deg); }
+}
+
+.anim-spin {
+  animation: spin-slow 15s linear infinite;
+}
+
+@keyframes pulse-rotate {
+  0%, 100% { transform: rotate(45deg) scale(1); }
+  50% { transform: rotate(45deg) scale(1.15); }
+}
+
+.anim-pulse-rotate {
+  animation: pulse-rotate 4s ease-in-out infinite;
+}
+
+@keyframes float-shape {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.anim-float {
+  animation: float-shape 6s ease-in-out infinite;
+}
+
+.anim-float-delay {
+  animation: float-shape 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@keyframes draw-line {
+  0% { stroke-dasharray: 0 150; }
+  50% { stroke-dasharray: 150 0; }
+  100% { stroke-dasharray: 0 150; }
+}
+
+.anim-draw {
+  animation: draw-line 8s ease-in-out infinite;
 }
 
 .fc-title {
@@ -737,6 +834,92 @@ h1, h2, h3, h4, h5, h6 {
 .n1 { top: 20%; border-color: rgba(79, 172, 254, 0.4); }
 .n2 { top: 50%; border-color: rgba(102, 226, 204, 0.4); }
 .n3 { top: 80%; border-color: rgba(183, 117, 255, 0.4); }
+
+/* Integrations Section */
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.platform-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.platform-card * {
+  position: relative;
+  z-index: 1;
+}
+
+.platform-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+}
+
+.logo-linkedin {
+  background: #0A66C2;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.logo-indeed {
+  color: #2164f3;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.5rem;
+  width: auto;
+}
+
+.logo-naukri {
+  color: #FF7555;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.5rem;
+  width: auto;
+}
+
+.logo-other {
+  color: var(--text-muted);
+}
+
+.platform-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.coming-soon {
+  opacity: 0.6;
+  border: 1px dashed var(--glass-border);
+  background: transparent;
+}
+
+.coming-soon:hover {
+  opacity: 0.8;
+}
+
+.status-badge {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
 
 /* Testimonials Marquee */
 .testimonials {
