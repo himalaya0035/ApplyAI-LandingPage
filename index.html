@@ -25,11 +25,7 @@
           <div class="brand-logo"></div>
           Apply<span class="text-gradient">AI</span>
         </a>
-        <ul class="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#testimonials">Success</a></li>
-        </ul>
+
         <div class="nav-actions">
           <a href="#" class="btn btn-ghost">Log In</a>
           <a href="#" class="btn btn-primary">Get Started</a>
@@ -139,23 +135,71 @@
           </div>
           <div class="split-visual reveal-right">
              <div class="animated-graphic glass-card">
-               <div class="beam"></div>
+               <!-- SVG Connectors & Data Flow Animation -->
+               <svg class="connections-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+                 <defs>
+                    <path id="path1" d="M 15 50 C 40 50, 60 20, 85 20" />
+                    <path id="path2" d="M 15 50 C 40 50, 60 50, 85 50" />
+                    <path id="path3" d="M 15 50 C 40 50, 60 80, 85 80" />
+                 </defs>
+                 
+                 <!-- Background paths -->
+                 <use href="#path1" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" vector-effect="non-scaling-stroke" />
+                 <use href="#path2" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" vector-effect="non-scaling-stroke" />
+                 <use href="#path3" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="0.5" vector-effect="non-scaling-stroke" />
+
+                 <!-- Animated Packets for Node 1 -->
+                 <circle r="1.5" fill="var(--accent-main)" opacity="0.8">
+                    <animateMotion dur="3s" repeatCount="indefinite">
+                       <mpath href="#path1"/>
+                    </animateMotion>
+                 </circle>
+                 <circle r="1" fill="var(--accent-main)" opacity="0.6">
+                    <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite">
+                       <mpath href="#path1"/>
+                    </animateMotion>
+                 </circle>
+
+                 <!-- Animated Packets for Node 2 -->
+                 <circle r="2" fill="var(--accent-secondary)" opacity="0.9">
+                    <animateMotion dur="2.5s" repeatCount="indefinite">
+                       <mpath href="#path2"/>
+                    </animateMotion>
+                 </circle>
+                 <circle r="1.5" fill="var(--accent-secondary)" opacity="0.7">
+                    <animateMotion dur="2.5s" begin="1.25s" repeatCount="indefinite">
+                       <mpath href="#path2"/>
+                    </animateMotion>
+                 </circle>
+
+                 <!-- Animated Packets for Node 3 -->
+                 <circle r="1.5" fill="var(--accent-tertiary)" opacity="0.8">
+                    <animateMotion dur="4s" repeatCount="indefinite">
+                       <mpath href="#path3"/>
+                    </animateMotion>
+                 </circle>
+                 <circle r="1" fill="var(--accent-tertiary)" opacity="0.6">
+                    <animateMotion dur="4s" begin="2s" repeatCount="indefinite">
+                       <mpath href="#path3"/>
+                    </animateMotion>
+                 </circle>
+               </svg>
+
                <div class="node origin">
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                </div>
-               <div class="data-packets">
-                 <div class="packet"></div>
-                 <div class="packet delay-1"></div>
-                 <div class="packet delay-2"></div>
-               </div>
-               <div class="node target n1">
+               
+               <div class="node target n1" title="Company Careers Pages">
                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                 <span class="node-label">Company Sites</span>
                </div>
-               <div class="node target n2">
+               <div class="node target n2" title="Job Boards (LinkedIn, Indeed)">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg>
+                  <span class="node-label">Job Boards</span>
                </div>
-               <div class="node target n3">
+               <div class="node target n3" title="Startup Networks (Wellfound)">
                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                 <span class="node-label">Startup Networks</span>
                </div>
              </div>
           </div>
