@@ -44,6 +44,86 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
+
+  // Pricing Toggle Logic
+  const btnMonthly = document.getElementById('btn-monthly');
+  const btnQuarterly = document.getElementById('btn-quarterly');
+  const toggleBg = document.getElementById('toggle-bg');
+  const pricingAmounts = document.querySelectorAll('.pricing-amount');
+  const billingTexts = document.querySelectorAll('.pricing-billing');
+  
+  if (btnMonthly && btnQuarterly && toggleBg) {
+    let pricingData = null;
+
+    // Default fallback data in case fetch fails
+    const defaultData = {
+      starter: { monthly: { price: "9.99", billingText: "Billed $9.99 monthly" }, quarterly: { price: "7.99", billingText: "Billed $19 every 3 months" } },
+      pro: { monthly: { price: "18.99", billingText: "Billed $18.99 monthly" }, quarterly: { price: "14.99", billingText: "Billed $39 every 3 months" } },
+      accelerator: { monthly: { price: "39", billingText: "Billed $39 monthly" }, quarterly: { price: "29", billingText: "Billed $69 every 3 months" } }
+    };
+
+    const updatePrices = (period) => {
+      const dataToUse = pricingData || defaultData;
+      pricingAmounts.forEach(el => {
+        const plan = el.dataset.plan;
+        if (dataToUse[plan] && dataToUse[plan][period]) {
+          el.textContent = dataToUse[plan][period].price;
+        }
+      });
+      billingTexts.forEach(el => {
+        const plan = el.dataset.plan;
+        if (dataToUse[plan] && dataToUse[plan][period]) {
+          el.textContent = dataToUse[plan][period].billingText;
+        }
+      });
+    };
+
+    fetch('pricing.json')
+      .then(res => res.json())
+      .then(data => {
+        pricingData = data;
+        const activePeriod = btnQuarterly.classList.contains('active') ? 'quarterly' : 'monthly';
+        updatePrices(activePeriod);
+      })
+      .catch(err => {
+        console.warn('Could not load pricing.json (likely due to CORS on file://). Using default prices.', err);
+      });
+
+    const updateBgTracker = (btn) => {
+      toggleBg.style.width = btn.offsetWidth + 'px';
+      toggleBg.style.left = btn.offsetLeft + 'px';
+    };
+
+    // Remove any transform from previous logic
+    toggleBg.style.transform = 'none';
+
+    btnMonthly.addEventListener('click', () => {
+      btnMonthly.classList.add('active');
+      btnQuarterly.classList.remove('active');
+      
+      updateBgTracker(btnMonthly);
+      updatePrices('monthly');
+    });
+
+    btnQuarterly.addEventListener('click', () => {
+      btnQuarterly.classList.add('active');
+      btnMonthly.classList.remove('active');
+      
+      updateBgTracker(btnQuarterly);
+      updatePrices('quarterly');
+    });
+
+    // Set initial state
+    setTimeout(() => {
+      updateBgTracker(btnQuarterly);
+    }, 100);
+    
+    // Update on resize
+    window.addEventListener('resize', () => {
+      const activeBtn = btnQuarterly.classList.contains('active') ? btnQuarterly : btnMonthly;
+      updateBgTracker(activeBtn);
+    });
+  }
 });
 
 // Glowing Cards Hover Effect

@@ -1,0 +1,32 @@
+{
+  "starter": {
+    "monthly": {
+      "price": "6.99",
+      "billingText": "Billed $6.99 monthly"
+    },
+    "quarterly": {
+      "price": "4.99",
+      "billingText": "Billed $14.99 every 3 months"
+    }
+  },
+  "pro": {
+    "monthly": {
+      "price": "11.99",
+      "billingText": "Billed $11.99 monthly"
+    },
+    "quarterly": {
+      "price": "8.99",
+      "billingText": "Billed $24.99 every 3 months"
+    }
+  },
+  "accelerator": {
+    "monthly": {
+      "price": "19.99",
+      "billingText": "Billed $19.99 monthly"
+    },
+    "quarterly": {
+      "price": "14.99",
+      "billingText": "Billed $39 every 3 months"
+    }
+  }
+}
