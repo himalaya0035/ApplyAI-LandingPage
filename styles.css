@@ -262,9 +262,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Simple Nav Link */
-.nav-link-simple {
+/* Simple Nav Link Fix */
+.navbar .nav-actions .nav-link-simple,
+.navbar .nav-actions .nav-link-simple:visited {
   color: var(--text-muted);
-  text-decoration: none;
+  text-decoration: none !important;
   font-size: 0.95rem;
   font-weight: 500;
   transition: var(--transition-fast);
@@ -272,11 +274,8 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.nav-link-simple:hover {
-  color: var(--text-main);
-}
-
-.nav-link-simple.active {
+.navbar .nav-actions .nav-link-simple:hover,
+.navbar .nav-actions .nav-link-simple.active {
   color: var(--text-main);
 }
 
@@ -621,6 +620,7 @@ h1, h2, h3, h4, h5, h6 {
   background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0) 30%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.05));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   opacity: 0.5;
   transition: all 0.5s ease;
